@@ -11,6 +11,9 @@
 - Preserve failed experiments and controls. Changed weights and long survival
   alone do not establish learning; numerical tests are not biological validation.
 - Store credentials and machine-specific origins only in ignored configuration.
+- Git commits (user instruction, 2026-09-11): never add AI attribution trailers to
+  commit messages or PR bodies — no `Co-Authored-By` naming an AI model (for
+  example "Claude Opus") and no `Claude-Session` link.
 - Preserve third-party notices. Do not bundle external research workbooks, papers,
   commercial game assets, dependency checkouts, or unrelated projects in archives.
 
