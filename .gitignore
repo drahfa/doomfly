@@ -32,6 +32,10 @@ neural_data/
 research/**/*.pdf
 research/**/*.xlsx
 tools/acc/
+tools/vizdoom-*.tar.gz
+tools/vizdoom-observer/
+outputs/doom/native-spectator-v1/engine/
+outputs/doom/local-*/
 *.npz
 *.so
 *.dylib
