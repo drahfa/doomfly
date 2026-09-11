@@ -1,0 +1,36 @@
+{
+  "study": "local-study-20260911",
+  "written_before_launch": true,
+  "question": "Does v6 KC-to-MBON11 plasticity change arena survival relative to an arm receiving identical damage-triggered PPL101 stimulation with frozen weights?",
+  "arms": {
+    "training": {
+      "port": 8766,
+      "command": "doom/run_broadcast.sh --model experimental-v6 --learning --port 8766 --audit-dir outputs/doom/local-study-20260911/training --checkpoint-dir outputs/doom/local-study-20260911/training/checkpoints --checkpoint-seconds 300 --resume",
+      "server_phase": "training"
+    },
+    "control": {
+      "port": 8767,
+      "command": "doom/run_broadcast.sh --model experimental-v6 --port 8767 --audit-dir outputs/doom/local-study-20260911/control --checkpoint-dir outputs/doom/local-study-20260911/control/checkpoints --checkpoint-seconds 300 --resume",
+      "server_phase": "frozen-control"
+    }
+  },
+  "matched": [
+    "Fresh neural state at launch in both arms (no pilot checkpoint reused)",
+    "Same Doom seed 41027, combat_survival arena, fixed BCI decoder, calibrated v6 brain",
+    "Same damage-to-PPL101 stimulation rule; only weight updates differ",
+    "Same host and software; both arms run the native observer mirror"
+  ],
+  "primary_outcome": "Survival length (game tics) of each completed round, compared between arms in consecutive blocks of 50 completed rounds",
+  "secondary_outcomes": [
+    "Kills per completed round",
+    "Training-arm weight change (changed edges, mean efficacy) over brain time"
+  ],
+  "comparison_rule": "Compare arms at equal round index and equal brain time. A learning-like effect requires training-arm survival to exceed control in later blocks, not only a within-arm trend. Early rounds are expected to be similar.",
+  "limits": [
+    "One seed and one reconstructed brain: a single pair cannot establish biological learning",
+    "Game outcomes diverge after the first differing action, so rounds are not paired one-to-one",
+    "Interrupted rounds after a restart are censored by the server and excluded",
+    "v6 previously failed visual, conditioning and survival validation gates"
+  ],
+  "pilot": "outputs/doom/local-pilot-20260911 (unmatched training-only run, excluded from this comparison)"
+}
