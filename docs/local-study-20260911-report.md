@@ -243,6 +243,36 @@ p = 3×10⁻¹¹, firing p = 3×10⁻¹¹, MBON11 p = 5×10⁻⁴⁴, damage rat
   209.2 / 196. Rounds 51–231: Mann-Whitney p = 0.066 (descriptive).
 - Training weights: 2,099 changed, mean efficacy 0.874.
 
+## 11. Study paused for host power (15:52)
+
+### Method
+The host battery was about to run out. Both arms were stopped with SIGTERM so
+each wrote a final checkpoint; the viewer dev server was stopped. `compare.py`
+was then run on the saved archives. The pause is an interruption, not part of
+the protocol: on resume each arm restores its checkpoint into a fresh arena
+under a new run ID, and the interrupted rounds are censored.
+
+### Results
+- Both arms stopped in about 2 s; checkpoints saved at 15:52:42. Nothing left running.
+- Total run time 3 h 58 min. Training 317 completed rounds, control 346.
+
+| Block (50 rounds) | Training mean / median | Control mean / median | Kills/round T / C |
+|---|---|---|---|
+| 5 | 248.5 / 222 | 248.7 / 214 | 0.90 / 0.84 |
+| 6 | 252.5 / 240 | 205.4 / 196 | 0.98 / 0.58 |
+
+- All completed rounds: training mean 227.1 / median 207 tics, control
+  211.7 / 199. Rounds 51–317: Mann-Whitney p = 0.001 (descriptive; this is the
+  fourth look at the data, one seed and one brain).
+- Block 5 was level; block 6 favoured training. The movement check (section 8)
+  was not rerun, so its explanation (a general move-and-fire shift) is untested
+  for blocks 5–6.
+
+### To resume
+From the repository root, rerun both commands in
+`outputs/doom/local-study-20260911/study.json` (they include `--resume`), each
+detached, then `caffeinate -i -w <pid>` for each process.
+
 ## Open issues
 
 - The six kernel build records are machine-specific local changes; do not commit
@@ -251,9 +281,9 @@ p = 3×10⁻¹¹, firing p = 3×10⁻¹¹, MBON11 p = 5×10⁻⁴⁴, damage rat
 - The viewer shows "offline" if a single game tic takes longer than 5 s of wall time.
 - 11 npm dependency vulnerabilities remain unaddressed.
 
-## Current status and next steps (14:39)
+## Current status and next steps (15:52)
 
-- Both arms are running unchanged since 11:54 and are restart-safe.
-- Next: keep both arms unchanged for several more hours and judge later
-  pre-registered blocks; treat the movement result as the leading explanation
-  unless a hit-specific difference appears; replicate with a second seed pair.
+- Both arms are paused with checkpoints saved at 15:52:42 and are restart-safe.
+- Next: resume both arms; rerun `movement.py` to test whether blocks 5–6 still
+  show a general move-and-fire shift rather than a hit-specific change; keep
+  judging later pre-registered blocks; replicate with a second seed pair.
