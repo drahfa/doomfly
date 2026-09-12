@@ -1,7 +1,7 @@
 {
   "model": "centered-antihebbian-v5",
   "source_sha256": "f1cca01b570f7445295c1d631cdaa108e16d268d39e5bfaeaf4dee7344114f37",
-  "binary_sha256": "229f76344acd7a3aa2dbd3bbdef7b9cfdbd76a03069f5725215a36e4dc522f28",
+  "binary_sha256": "56f370db8ee2284419da6e5beaa64eec721e865178b72138420a826cfb2415e3",
   "flags": [
     "-O3",
     "-std=c++17",
